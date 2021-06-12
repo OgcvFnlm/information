@@ -23,3 +23,9 @@ def create_app(config_name):
     CSRFProtect(app)
 
     Session(app)
+
+    from info.modules.index import index_blu
+    app.register_blueprint(index_blu)
+
+    return app
+
