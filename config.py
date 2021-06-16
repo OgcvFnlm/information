@@ -1,3 +1,4 @@
+from flask import logging
 from redis import StrictRedis
 class Config(object):
     """工程配置信息"""
@@ -17,6 +18,8 @@ class Config(object):
     SESSION_REDIS = StrictRedis(host=REDIS_HOST, port=REDIS_PORT)  # 使用 redis 的实例
     PERMANENT_SESSION_LIFETIME = 86400  # session 的有效期，单位是秒
 
+    LOG_LEVEL = logging.DEBUG
+
 class DevelopementConfig(Config):
     """开发模式下的配置"""
     DEBUG = True
@@ -24,7 +27,7 @@ class DevelopementConfig(Config):
 
 class ProductionConfig(Config):
     """生产模式下的配置"""
-    pass
+    LOG_LEVEL = logging.ERROR
 
 config = {
     "development": DevelopementConfig,
